@@ -1,19 +1,17 @@
 package com.barogo.api.global.common;
 
-import com.sun.istack.NotNull;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
 import org.springframework.validation.annotation.Validated;
 
 @Builder
-@Data
+@Getter
 @Validated
 public class Response {
 
-    @NotNull
     @Builder.Default
     private String code = "0000";
 
-    @NotNull
     @Builder.Default
     private String message = "success";
 
