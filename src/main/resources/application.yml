@@ -1,1 +1,19 @@
+spring:
+  datasource:
+    # url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:testdb;MODE=MySQL;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
 
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        use_sql_comments: true
+    show-sql: true
+
+jwt:
+  secret: "157yaW5nLWJvb3Qtc2VjdXdAfdFaso54xaIgDl1dPolkGp2poDklJklIl4nf35jdC1zZWN1cml0eS1qd3QtdHV0b332Z"
