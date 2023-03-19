@@ -15,6 +15,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ import org.springframework.util.ObjectUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.util.Collections;
 
 @Log4j2
 @Service
@@ -120,7 +123,20 @@ public class AuthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String id) {
-        return userService.getAuthByUserId(id);
+        User user = userService.getAuthByUserId(id);
+        return createUserDetails(user);
+    }
+
+    private UserDetails createUserDetails(User user) {
+
+        GrantedAuthority grantedAuthority
+                = new SimpleGrantedAuthority("USER");
+
+        return new org.springframework.security.core.userdetails.User(
+                user.getUsername(),
+                "",
+                Collections.singleton(grantedAuthority)
+        );
     }
 
     private TokenResponseDto getAccessToken(String userId) {

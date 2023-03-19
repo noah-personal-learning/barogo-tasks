@@ -1,9 +1,16 @@
 package com.barogo.api.domain.auth.controller;
 
 import com.barogo.api.domain.auth.dto.AuthRequestDto;
+import com.barogo.api.domain.user.dto.UserRegisterRequestDto;
+import com.barogo.api.domain.user.dto.UserRegisterResponseDto;
+import com.barogo.api.domain.user.entity.User;
+import com.barogo.api.domain.user.repository.UserRepository;
+import com.barogo.api.domain.user.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -30,9 +37,23 @@ public class AuthControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    UserRepository userRepository;
+
+    @BeforeEach
+    public void init() {
+        userRepository.save(
+                User.builder()
+                    .userId("NoahTest001")
+                    .password("NoahTest001")
+                    .username("박노아")
+                    .address("인천 서구")
+                .build());
+    }
+
     @Test
-    @DisplayName("가입되어 있지 않은 사용자 예외 처리")
-    public void notFountUser() throws Exception {
+    @DisplayName("로그인 성공")
+    public void successLogin() throws Exception {
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
@@ -44,7 +65,7 @@ public class AuthControllerTest {
                         .headers(headers)
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(loginReqDto)))
-                .andExpect(status().is4xxClientError())
+                .andExpect(status().isOk())
                 .andDo(print());
 
         System.out.println(result.andReturn().getResponse().getContentAsString());
