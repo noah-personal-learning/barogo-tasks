@@ -1,25 +1,20 @@
 package com.barogo.api.domain.user.api;
 
-import com.barogo.api.domain.user.dto.UserRequestDto;
+import com.barogo.api.domain.user.dto.UserRegisterRequestDto;
+import com.barogo.api.domain.user.dto.UserRegisterResponseDto;
+import com.barogo.api.domain.user.exception.AlreadyUserIdException;
 import com.barogo.api.domain.user.repository.UserRepository;
 import com.barogo.api.domain.user.service.UserService;
-import org.junit.jupiter.api.BeforeEach;
+import org.assertj.core.api.Assertions;
+import org.junit.Assert;
+import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.filter.CharacterEncodingFilter;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 @SpringBootTest
 public class UserControllerTest {
@@ -30,19 +25,37 @@ public class UserControllerTest {
     UserRepository userRepository;
 
     @Test
-    @DisplayName("회원가입 테스트")
-    public void join() throws Exception {
+    @DisplayName("회원가입을 성공한다.")
+    public void successRegister() throws Exception {
         // given
-        UserRequestDto requestDto = UserRequestDto.builder()
-                .login_id("NoahTest001")
+        UserRegisterRequestDto requestDto = UserRegisterRequestDto.builder()
+                .loginId("NoahTest001")
                 .password("NoahTest001")
                 .name("박노아")
                 .address("인천 서구")
                 .build();
         // when
-        userService.join(requestDto);
+        UserRegisterResponseDto result = userService.join(requestDto);
 
         // then
+        Assertions.assertThat(result.getLoginId()).isEqualTo(requestDto.getUserId());
+    }
+
+    @Test
+    @DisplayName("회원가입을 실패한다.")
+    public void failRegister() {
+
+        // given
+        UserRegisterRequestDto requestDto = UserRegisterRequestDto.builder()
+                .loginId("NoahTest001")
+                .password("NoahTest001")
+                .name("박노아")
+                .address("인천 서구")
+                .build();
+
+        // when & then
+        Assert.assertThrows(AlreadyUserIdException.class, () -> userService.join(requestDto));
+
     }
 
 
