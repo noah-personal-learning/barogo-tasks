@@ -26,7 +26,7 @@ public class User extends DateEntity{
     private String password;
 
     @Column(name = "name")
-    private String name;
+    private String username;
 
     @Column(name = "address")
     private String address;
@@ -39,10 +39,10 @@ public class User extends DateEntity{
 
 
     @Builder
-    public User(String userId, String password, String name, String address, String regIp) {
+    public User(String userId, String password, String username, String address, String regIp) {
         this.userId = userId;
         this.password = password;
-        this.name = name;
+        this.username = username;
         this.address = address;
         this.regIp = regIp;
 

@@ -15,13 +15,11 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     UserRepository userRepository;
+    UserValidationService validationService;
 
     public UserRegisterResponseDto join(UserRegisterRequestDto requestDto) {
 
-        // 이미 가입되어 있는 경우 예외 처리
-        if (userRepository.findByUserId(requestDto.getUserId()).isPresent()) {
-            throw new AlreadyUserIdException();
-        }
+        validationService.join(requestDto);
 
         User user = requestDto.toEntity(requestDto);
 
@@ -36,7 +34,7 @@ public class UserService {
         return userRepository.findByUserIdAndPassword(userId, password).orElseThrow(NotFoundUserException::new);
     }
 
-    public UserDetails getAuthByUserId(String userId) {
+    public User getAuthByUserId(String userId) {
         return userRepository.findAuthByUserId(userId).orElseThrow(NotFoundUserException::new);
     }
 }

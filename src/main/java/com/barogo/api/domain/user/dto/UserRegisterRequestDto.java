@@ -33,11 +33,25 @@ public class UserRegisterRequestDto {
 
     @Builder
     public UserRegisterRequestDto(String loginId, String password, String name, String address) {
+
+        boolean skip = false;
+        HttpServletRequest request = null;
+        try {
+            request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        } catch (IllegalStateException ise) {
+            skip = true;
+        }
+
         this.userId = loginId;
         this.password = password;
         this.name = name;
         this.address = address;
-        this.regIp = getRemoteIp();
+        if (skip) {
+            this.regIp = "127.0.0.1";
+        } else {
+            this.regIp = getRemoteIp(request);
+        }
+
     }
 
     // todo. User toEntity
@@ -45,14 +59,13 @@ public class UserRegisterRequestDto {
         return User.builder()
                 .userId(requestDto.getUserId())
                 .address(requestDto.getAddress())
-                .name(requestDto.getName())
+                .username(requestDto.getName())
                 .password(requestDto.getPassword())
                 .regIp(requestDto.getRegIp())
                 .build();
     }
 
-    public String getRemoteIp() {
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+    public String getRemoteIp(HttpServletRequest request) {
         String ip = request.getHeader("X-Forwarded-For");
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("Proxy-Client-IP");
