@@ -22,6 +22,8 @@ Java 11, Spring Boot, H2 Database, Redis, Junit5, Swagger
   - [ ] 배달 상태 수정 실패
 
 ### ERD 설계
+![image](https://user-images.githubusercontent.com/50124623/226638899-1c2e95e5-6ba4-4f0b-b99e-df98042c973b.png)
+
 
 ### 프로젝트 구조 설계
 ```
