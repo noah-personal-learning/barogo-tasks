@@ -1,4 +1,4 @@
-package com.barogo.api.domain.user.api;
+package com.barogo.api.domain.user.controller;
 
 import com.barogo.api.domain.user.service.UserService;
 import lombok.AllArgsConstructor;

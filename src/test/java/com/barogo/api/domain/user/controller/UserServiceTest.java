@@ -1,4 +1,4 @@
-package com.barogo.api.domain.user.api;
+package com.barogo.api.domain.user.controller;
 
 import com.barogo.api.domain.user.dto.UserRegisterRequestDto;
 import com.barogo.api.domain.user.dto.UserRegisterResponseDto;
