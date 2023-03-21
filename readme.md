@@ -21,5 +21,53 @@ Java 11, Spring Boot, H2 Database, Redis, Junit5, Swagger
   - [ ] 배달 상태 수정 성공
   - [ ] 배달 상태 수정 실패
 
+### ERD 설계
+
+### 프로젝트 구조 설계
+```
+  src
+    ├─main
+    │  ├─java
+    │  │  └─com
+    │  │      └─barogo
+    │  │          └─api
+    │  │              ├─domain
+    │  │              │  ├─auth
+    │  │              │  │  ├─controller
+    │  │              │  │  ├─dto
+    │  │              │  │  ├─entity
+    │  │              │  │  ├─repository
+    │  │              │  │  └─service
+    │  │              │  ├─delivery
+    │  │              │  │  ├─controller
+    │  │              │  │  ├─dto
+    │  │              │  │  ├─entity
+    │  │              │  │  ├─repository
+    │  │              │  │  └─service
+    │  │              │  ├─order
+    │  │              │  │  ├─controller
+    │  │              │  │  ├─dto
+    │  │              │  │  ├─entity
+    │  │              │  │  ├─repository
+    │  │              │  │  └─service
+    │  │              │  └─user
+    │  │              │      ├─controller
+    │  │              │      ├─dto
+    │  │              │      ├─entity
+    │  │              │      ├─exception
+    │  │              │      ├─repository
+    │  │              │      └─service
+    │  │              └─global
+    │  │                  ├─common
+    │  │                  ├─config
+    │  │                  │  ├─jwt
+    │  │                  │  └─security
+    │  │                  ├─error
+    │  │                  └─util
+    │  └─resources
+    │      └─META-INF
+```
+
+
 ### Idea
 - 주문, 배송 도메인을 따로 둘 것인가?
