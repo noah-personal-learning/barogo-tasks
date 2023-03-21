@@ -1,10 +1,11 @@
 package com.barogo.api.domain.auth.dto;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-@Data
-@Builder
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TokenResponseDto {
 
     private String accessToken;
@@ -12,4 +13,11 @@ public class TokenResponseDto {
     private String grantType;
     private Long accessTokenExpiresIn;
 
+    @Builder
+    public TokenResponseDto(String accessToken, String refreshToken, String grantType, Long accessTokenExpiresIn) {
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
+        this.grantType = grantType;
+        this.accessTokenExpiresIn = accessTokenExpiresIn;
+    }
 }

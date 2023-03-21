@@ -1,9 +1,12 @@
 package com.barogo.api.domain.auth.dto;
 
 import com.sun.istack.NotNull;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TokenRequestDto {
 
     @NotNull
