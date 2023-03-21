@@ -70,7 +70,7 @@ public class AuthService implements UserDetailsService {
 
         UserLoginResponseDto userLoginResponseDto = new UserLoginResponseDto();
         UserInfoResponseDto userInfoResponseDto = new UserInfoResponseDto();
-        BeanUtils.copyProperties(userLoginResponseDto, userInfoResponseDto);
+        BeanUtils.copyProperties(user, userInfoResponseDto);
 
         userLoginResponseDto.setAccessToken(tokenResponseDto.getAccessToken());
         userLoginResponseDto.setRefreshToken(tokenResponseDto.getRefreshToken());
