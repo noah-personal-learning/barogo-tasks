@@ -1,4 +1,4 @@
-package com.barogo.api.domain.auth.dto;
+package com.barogo.api.domain.auth.dto.response;
 
 import lombok.*;
 

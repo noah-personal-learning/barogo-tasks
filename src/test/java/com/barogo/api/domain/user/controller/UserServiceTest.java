@@ -1,7 +1,7 @@
 package com.barogo.api.domain.user.controller;
 
-import com.barogo.api.domain.user.dto.UserRegisterRequestDto;
-import com.barogo.api.domain.user.dto.UserRegisterResponseDto;
+import com.barogo.api.domain.user.dto.request.UserRegisterRequestDto;
+import com.barogo.api.domain.user.dto.response.UserRegisterResponseDto;
 import com.barogo.api.domain.user.exception.AlreadyUserIdException;
 import com.barogo.api.domain.user.repository.UserRepository;
 import com.barogo.api.domain.user.service.UserService;

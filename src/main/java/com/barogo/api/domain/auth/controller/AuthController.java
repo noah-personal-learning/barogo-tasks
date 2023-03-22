@@ -1,10 +1,10 @@
 package com.barogo.api.domain.auth.controller;
 
-import com.barogo.api.domain.auth.dto.AuthRequestDto;
-import com.barogo.api.domain.auth.dto.TokenRequestDto;
-import com.barogo.api.domain.auth.dto.TokenResponseDto;
+import com.barogo.api.domain.auth.dto.request.AuthRequestDto;
+import com.barogo.api.domain.auth.dto.request.TokenRequestDto;
+import com.barogo.api.domain.auth.dto.response.TokenResponseDto;
 import com.barogo.api.domain.auth.service.AuthService;
-import com.barogo.api.domain.user.dto.UserLoginResponseDto;
+import com.barogo.api.domain.user.dto.response.UserLoginResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

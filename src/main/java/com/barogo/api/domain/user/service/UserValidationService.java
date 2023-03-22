@@ -1,6 +1,6 @@
 package com.barogo.api.domain.user.service;
 
-import com.barogo.api.domain.user.dto.UserRegisterRequestDto;
+import com.barogo.api.domain.user.dto.request.UserRegisterRequestDto;
 import com.barogo.api.domain.user.exception.AlreadyUserIdException;
 import com.barogo.api.domain.user.exception.InvalidPasswordException;
 import com.barogo.api.domain.user.repository.UserRepository;

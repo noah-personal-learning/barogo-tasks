@@ -1,12 +1,12 @@
 package com.barogo.api.domain.auth.service;
 
-import com.barogo.api.domain.auth.dto.AuthRequestDto;
-import com.barogo.api.domain.auth.dto.TokenRequestDto;
-import com.barogo.api.domain.auth.dto.TokenResponseDto;
+import com.barogo.api.domain.auth.dto.request.AuthRequestDto;
+import com.barogo.api.domain.auth.dto.request.TokenRequestDto;
+import com.barogo.api.domain.auth.dto.response.TokenResponseDto;
 import com.barogo.api.domain.auth.entity.AuthRefreshToken;
 import com.barogo.api.domain.auth.repository.AuthRefreshTokenRepository;
-import com.barogo.api.domain.user.dto.UserInfoResponseDto;
-import com.barogo.api.domain.user.dto.UserLoginResponseDto;
+import com.barogo.api.domain.user.dto.response.UserInfoResponseDto;
+import com.barogo.api.domain.user.dto.response.UserLoginResponseDto;
 import com.barogo.api.domain.user.entity.User;
 import com.barogo.api.domain.user.service.UserService;
 import com.barogo.api.global.config.jwt.JwtTokenProvider;

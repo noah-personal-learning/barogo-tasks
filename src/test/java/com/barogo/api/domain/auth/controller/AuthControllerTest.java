@@ -1,10 +1,9 @@
 package com.barogo.api.domain.auth.controller;
 
-import com.barogo.api.domain.auth.dto.AuthRequestDto;
+import com.barogo.api.domain.auth.dto.request.AuthRequestDto;
 import com.barogo.api.domain.user.entity.User;
 import com.barogo.api.domain.user.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

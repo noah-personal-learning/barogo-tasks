@@ -1,4 +1,4 @@
-package com.barogo.api.domain.user.dto;
+package com.barogo.api.domain.user.dto.request;
 
 import com.barogo.api.domain.user.entity.User;
 import com.fasterxml.jackson.annotation.JsonProperty;

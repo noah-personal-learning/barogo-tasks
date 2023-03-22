@@ -1,11 +1,10 @@
 package com.barogo.api.global.config.jwt;
 
-import com.barogo.api.domain.auth.dto.TokenResponseDto;
+import com.barogo.api.domain.auth.dto.response.TokenResponseDto;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

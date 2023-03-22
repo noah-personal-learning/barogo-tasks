@@ -1,4 +1,4 @@
-package com.barogo.api.domain.user.dto;
+package com.barogo.api.domain.user.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;

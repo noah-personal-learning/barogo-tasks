@@ -1,13 +1,11 @@
 package com.barogo.api.domain.user.service;
 
-import com.barogo.api.domain.user.dto.UserRegisterRequestDto;
-import com.barogo.api.domain.user.dto.UserRegisterResponseDto;
+import com.barogo.api.domain.user.dto.request.UserRegisterRequestDto;
+import com.barogo.api.domain.user.dto.response.UserRegisterResponseDto;
 import com.barogo.api.domain.user.entity.User;
-import com.barogo.api.domain.user.exception.AlreadyUserIdException;
 import com.barogo.api.domain.user.exception.NotFoundUserException;
 import com.barogo.api.domain.user.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service

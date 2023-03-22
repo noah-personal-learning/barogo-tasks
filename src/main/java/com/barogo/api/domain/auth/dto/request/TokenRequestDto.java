@@ -1,4 +1,4 @@
-package com.barogo.api.domain.auth.dto;
+package com.barogo.api.domain.auth.dto.request;
 
 import com.sun.istack.NotNull;
 import lombok.*;
