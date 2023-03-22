@@ -8,5 +8,5 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class HistoryDeliveryRequestDto {
+public class DeliveryHistoryRequestDto {
 }
