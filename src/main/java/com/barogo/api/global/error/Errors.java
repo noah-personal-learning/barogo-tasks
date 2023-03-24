@@ -5,9 +5,14 @@ import java.util.HashMap;
 public enum Errors {
 
     NOT_FOUND_USER("존재하지 않는 사용자 정보", "다른 아이디와 비밀번호로 다시 시도해주세요."),
+    NOT_FOUND_ORDER("존재하지 않는 주문 정보", "다른 주문 정보로 다시 시도해주세요."),
+
     ALREADY_USER("이미 가입되어 있는 아이디", "다른 아이디로 다시 시도해주세요."),
+
     INVALID_PASSWORD("잘못된 패스워드", "비밀번호는 영어 대문자, 소문자, 특수문자 중 3종류 이상으로 12자리 이상의 문자열로 생성해야합니다."),
     INVALID_FORMAT("잘못된 요청", "파라미터를 확인해주세요."),
+
+    MAX_BEFORE_DAY("최대값 초과", "최대 검색 기간은 3일 입니다.")
     ;
 
     private final String code;

@@ -1,5 +1,6 @@
 package com.barogo.api.global.error;
 
+import com.barogo.api.domain.delivery.exception.MaxBeforeDayException;
 import com.barogo.api.domain.user.exception.AlreadyUserIdException;
 import com.barogo.api.domain.user.exception.InvalidPasswordException;
 import com.barogo.api.domain.user.exception.NotFoundUserException;
@@ -35,6 +36,18 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
                 .message(errors.toString()).build();
 
         return new ResponseEntity<Object>(apiError, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+    }
+
+
+    @ExceptionHandler({MaxBeforeDayException.class})
+    public ResponseEntity<Object> handleNotFoundUser(final MaxBeforeDayException ex, final HttpServletRequest request) {
+        logger.info(ex.getClass().getName());
+
+        Response response = Response.exceptionResponse()
+                .code(Errors.NOT_FOUND_USER.getCode())
+                .message(Errors.NOT_FOUND_USER.getDescription()).build();
+
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler({NotFoundUserException.class})
