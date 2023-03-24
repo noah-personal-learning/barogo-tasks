@@ -3,9 +3,9 @@ package com.barogo.api.domain.order.dto.request;
 import com.barogo.api.domain.order.entity.Order;
 import com.barogo.api.global.util.code.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.istack.NotNull;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
@@ -17,12 +17,19 @@ import java.time.LocalDateTime;
 public class OrderRequestDto {
 
     @JsonProperty("address")
+    @NotNull(message = "address is required")
     private String address;
+
     @JsonProperty("product_name")
+    @NotNull(message = "product_name is required")
     private String productName;
+
     @JsonProperty("product_count")
-    private BigDecimal productCount;
+    @NotNull(message = "product_count is required")
+    private Integer productCount;
+
     @JsonProperty("product_unit_price")
+    @NotNull(message = "product_unit_price is required")
     private BigDecimal productUnitPrice;
 
     private BigDecimal amount;
@@ -34,11 +41,11 @@ public class OrderRequestDto {
 
     @Builder
     public OrderRequestDto(String address,
-                           String productName, BigDecimal productCount, BigDecimal productUnitPrice) {
+                           String productName, Integer productCount, BigDecimal productUnitPrice) {
         this.orderDate = LocalDateTime.now();
         this.address = address;
         this.status = OrderStatus.ORDER_REQUEST;
-        this.amount = productUnitPrice.multiply(productCount);
+        this.amount = productUnitPrice.multiply(BigDecimal.valueOf(productCount));
         this.fee = this.amount.multiply(new BigDecimal("0.01")).setScale(2, RoundingMode.HALF_UP);
         this.productName = productName;
         this.productCount = productCount;
