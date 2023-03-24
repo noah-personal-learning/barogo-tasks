@@ -17,6 +17,7 @@ public class Order extends DateEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_id")
     private Long id;
 
     @Column(name = "order_date")

@@ -15,14 +15,14 @@ public class OrderService {
 
     public OrderResponseDto orderRequest(OrderRequestDto requestDto) {
 
-        OrderRequestDto orderRequestDto = OrderRequestDto.builder()
+        requestDto = OrderRequestDto.builder()
                 .address(requestDto.getAddress())
                 .productName(requestDto.getProductName())
                 .productCount(requestDto.getProductCount())
                 .productUnitPrice(requestDto.getProductUnitPrice())
                 .build();
 
-        Order order = orderRequestDto.toEntity();
+        Order order = requestDto.toEntity();
         order = orderRepository.save(order);
 
         return OrderResponseDto.builder()
