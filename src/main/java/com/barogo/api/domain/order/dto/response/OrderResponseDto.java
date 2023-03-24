@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderResponseDto {
 
+    @JsonProperty("order_id")
+    private Long id;
     @JsonProperty("order_date")
     private LocalDateTime orderDate;
     @JsonProperty("address")
@@ -25,14 +27,14 @@ public class OrderResponseDto {
     @JsonProperty("product_name")
     private String productName;
     @JsonProperty("product_count")
-    private BigDecimal productCount;
+    private Integer productCount;
     @JsonProperty("product_unit_price")
     private BigDecimal productUnitPrice;
 
     @Builder
     public OrderResponseDto(LocalDateTime orderDate, String address, OrderStatus status,
                             BigDecimal amount, BigDecimal fee,
-                            String productName, BigDecimal productCount, BigDecimal productUnitPrice) {
+                            String productName, Integer productCount, BigDecimal productUnitPrice) {
         this.orderDate = orderDate;
         this.address = address;
         this.status = status;

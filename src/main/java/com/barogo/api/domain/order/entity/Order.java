@@ -42,7 +42,7 @@ public class Order extends DateEntity {
     private String productName;
 
     @Column(name = "product_count")
-    private BigDecimal productCount;
+    private Integer productCount;
 
     @Column(name = "product_unit_price")
     private BigDecimal productUnitPrice;
@@ -50,7 +50,7 @@ public class Order extends DateEntity {
     @Builder
     public Order(LocalDateTime orderDate, String address, OrderStatus status,
                  LocalDateTime completeDate, BigDecimal amount, BigDecimal fee,
-                 String productName, BigDecimal productCount, BigDecimal productUnitPrice) {
+                 String productName, Integer productCount, BigDecimal productUnitPrice) {
         this.orderDate = orderDate;
         this.address = address;
         this.status = status;
