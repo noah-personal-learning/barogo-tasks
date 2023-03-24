@@ -59,7 +59,6 @@ public class AuthControllerTest {
         // when & then
         ResultActions result = this.mockMvc.perform(get("/auth/login")
                         .headers(headers)
-                        .contentType("application/json")
                         .content(objectMapper.writeValueAsString(loginReqDto)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$..userId").value("NoahTest001"))
