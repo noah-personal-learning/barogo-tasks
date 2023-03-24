@@ -12,7 +12,7 @@ public enum Errors {
     INVALID_PASSWORD("잘못된 패스워드", "비밀번호는 영어 대문자, 소문자, 특수문자 중 3종류 이상으로 12자리 이상의 문자열로 생성해야합니다."),
     INVALID_FORMAT("잘못된 요청", "파라미터를 확인해주세요."),
 
-    MAX_BEFORE_DAY("최대값 초과", "최대 검색 기간은 3일 입니다.")
+    MAX_BEFORE_DAY("검색 기간 초과", "최대 검색 기간은 3일 입니다.")
     ;
 
     private final String code;

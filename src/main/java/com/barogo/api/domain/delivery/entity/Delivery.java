@@ -3,13 +3,17 @@ package com.barogo.api.domain.delivery.entity;
 import com.barogo.api.domain.order.entity.Order;
 import com.barogo.api.global.util.DateEntity;
 import com.barogo.api.global.util.code.DeliveryStatus;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Getter
+@Table(name = "delivery")
 public class Delivery extends DateEntity {
 
     @Id

@@ -6,6 +6,8 @@ import com.barogo.api.domain.order.entity.Order;
 import com.barogo.api.domain.order.repository.OrderRepository;
 import com.barogo.api.global.util.code.DeliveryStatus;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -58,8 +60,14 @@ public class DeliveryControllerTest {
                         .build());
     }
 
+    @AfterEach
+    void afterEach() {
+        deliveryRepository.deleteAll();
+        orderRepository.deleteAll();
+    }
+
     @Test
-    @DisplayName("3일전 배송 기록을 가져온다.")
+    @DisplayName("3일까지의 배송 조회를 성공한다.")
     @WithMockUser
     void getDeliveryHistory() throws Exception {
         // given
@@ -76,6 +84,28 @@ public class DeliveryControllerTest {
                         .headers(headers)
                         .content(objectMapper.writeValueAsString(requestData)))
                 .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @Test
+    @DisplayName("4일까지의 배송 조회를 실패한다.")
+    @WithMockUser
+    void getFailDeliveryHistory() throws Exception {
+        // given
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+        headers.set("Accept", "application/json");
+
+        Map<String,String> requestData = new HashMap<>();
+        requestData.put("order_id", "1");
+        requestData.put("before_day", "4");
+
+        // when & then00
+        ResultActions result = this.mockMvc.perform(get("/delivery/history")
+                        .headers(headers)
+                        .content(objectMapper.writeValueAsString(requestData)))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$..code").value("검색 기간 초과"))
                 .andDo(print());
     }
 
