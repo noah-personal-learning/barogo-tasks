@@ -1,13 +1,13 @@
 package com.barogo.api.global.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-@Configurable
+@Configuration
 public class JPAConfig {
 
     @PersistenceContext
