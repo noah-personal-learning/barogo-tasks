@@ -1,7 +1,7 @@
 # 바로고 사전과제
 
 ### 기술 스택
-Java 11, Spring Boot, H2 Database, Redis, Junit5, Swagger
+Java 11, Spring Boot, H2 Database, Junit5
 
 ### TODO LIST
 - [X] ERD 설계 (회원, 인증, 주문)
@@ -16,13 +16,15 @@ Java 11, Spring Boot, H2 Database, Redis, Junit5, Swagger
   - [ ] ~~상품 조회 성공~~
   - [X] 주문 등록 성공
   - [X] 주문 등록 실패
-  - [ ] 주문 수정(목적지) 성공
-  - [ ] 배달 상태 수정 성공
-  - [ ] 배달 상태 수정 실패
+  - [X] 주문 상태 변경 성공
+  - [X] 주문 상태 변경 실패
+  - [X] 주문 수정(목적지) 성공
+  - [ ] ~~배달 상태 수정 성공~~
+  - [ ] ~~배달 상태 수정 실패~~
   - [X] 배달 조회 성공
-  d- [X] 배달 조회 실패
-  - [ ] 배달 목적지 수정 성공
-  - [ ] 배달 목적지 수정 실패
+  - [X] 배달 조회 실패
+  - [X] 배달 목적지 수정 성공
+  - [X] 배달 목적지 수정 실패
 
 ### ERD 설계
 ![image](https://user-images.githubusercontent.com/50124623/226638899-1c2e95e5-6ba4-4f0b-b99e-df98042c973b.png)
@@ -72,7 +74,3 @@ Java 11, Spring Boot, H2 Database, Redis, Junit5, Swagger
     │  └─resources
     │      └─META-INF
 ```
-
-
-### Idea
-- 주문, 배송 도메인을 따로 둘 것인가?
