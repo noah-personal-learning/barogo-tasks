@@ -69,8 +69,8 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         logger.info(ex.getClass().getName());
 
         Response response = Response.exceptionResponse()
-                .code(Errors.NOT_FOUND_USER.getCode())
-                .message(Errors.NOT_FOUND_USER.getDescription()).build();
+                .code(Errors.ALREADY_USER.getCode())
+                .message(Errors.ALREADY_USER.getDescription()).build();
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
@@ -80,8 +80,8 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         logger.info(ex.getClass().getName());
 
         Response response = Response.exceptionResponse()
-                .code(Errors.NOT_FOUND_USER.getCode())
-                .message(Errors.NOT_FOUND_USER.getDescription()).build();
+                .code(Errors.INVALID_PASSWORD.getCode())
+                .message(Errors.INVALID_PASSWORD.getDescription()).build();
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }

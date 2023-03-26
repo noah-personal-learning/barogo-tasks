@@ -4,12 +4,14 @@ import com.barogo.api.domain.user.dto.request.UserRegisterRequestDto;
 import com.barogo.api.domain.user.exception.AlreadyUserIdException;
 import com.barogo.api.domain.user.exception.InvalidPasswordException;
 import com.barogo.api.domain.user.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class UserValidationService {
 
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public void join(UserRegisterRequestDto requestDto) {
         // 이미 가입되어 있는 경우 예외 처리

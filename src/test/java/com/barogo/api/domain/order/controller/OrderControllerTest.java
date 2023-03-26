@@ -1,7 +1,9 @@
 package com.barogo.api.domain.order.controller;
 
-import com.barogo.api.domain.order.dto.request.OrderRequestDto;
+import com.barogo.api.domain.delivery.repository.DeliveryRepository;
+import com.barogo.api.domain.order.repository.OrderRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.AfterClass;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -12,12 +14,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -27,10 +26,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @WebAppConfiguration
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class OrderControllerTest {
+public class OrderControllerTest {
 
     @Autowired private MockMvc mockMvc;
     @Autowired private ObjectMapper objectMapper;
+    @Autowired private static OrderRepository orderRepository;
+    @Autowired private static DeliveryRepository deliveryRepository;
+
+    @AfterClass
+    static void afterClass() {
+        deliveryRepository.deleteAll();
+        orderRepository.deleteAll();
+    }
 
     @Test
     @DisplayName("주문 요청이 성공한다.")

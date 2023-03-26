@@ -7,10 +7,8 @@ import com.barogo.api.domain.order.repository.OrderRepository;
 import com.barogo.api.global.util.code.DeliveryStatus;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,6 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
 @WebAppConfiguration
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DeliveryControllerTest {
 
     @Autowired private MockMvc mockMvc;
@@ -60,8 +59,8 @@ public class DeliveryControllerTest {
                         .build());
     }
 
-    @AfterEach
-    void afterEach() {
+    @AfterAll
+    void afterClass() {
         deliveryRepository.deleteAll();
         orderRepository.deleteAll();
     }

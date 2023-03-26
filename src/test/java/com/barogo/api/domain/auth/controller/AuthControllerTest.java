@@ -45,8 +45,13 @@ public class AuthControllerTest {
                 .build());
     }
 
+    @AfterEach
+    void afterEach() {
+        userRepository.deleteAll();
+    }
+
     @Test
-    @DisplayName("로그인 성공")
+    @DisplayName("로그인을 성공한다.")
     public void successLogin() throws Exception {
 
         // given
@@ -66,7 +71,7 @@ public class AuthControllerTest {
     }
 
     @Test
-    @DisplayName("로그인 실패")
+    @DisplayName("로그인을 실패한다.")
     public void failLogin() throws Exception {
 
         // given
@@ -87,8 +92,4 @@ public class AuthControllerTest {
                 .andDo(print());
     }
 
-    @AfterEach
-    void afterEach() {
-        userRepository.deleteAll();
-    }
 }

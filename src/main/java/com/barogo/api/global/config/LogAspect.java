@@ -7,11 +7,11 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class LogAspect {
 
-    @Around("execution(* com.barogo.api.domain.*..service.*Service.*(..))")
+    // @Around("execution(* com.barogo.api.domain.*..service.*Service.*(..))")
     public Object logging(ProceedingJoinPoint joinPoint) throws Throwable {
         Object result = joinPoint.proceed();
         log.info("==> LogAspect Root : " + joinPoint.getSignature().getDeclaringTypeName());
