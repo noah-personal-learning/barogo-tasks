@@ -2,8 +2,7 @@ package com.barogo.api.domain.order.controller;
 
 import com.barogo.api.domain.order.dto.request.OrderRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
 @WebAppConfiguration
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class OrderControllerTest {
 
     @Autowired private MockMvc mockMvc;
@@ -35,7 +35,8 @@ class OrderControllerTest {
     @Test
     @DisplayName("주문 요청이 성공한다.")
     @WithMockUser
-    public void successOfOrderRequest () throws Exception {
+    @Order(1)
+    public void successOfOrderRequest() throws Exception {
         // given
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
@@ -48,7 +49,7 @@ class OrderControllerTest {
         orderRequestData.put("product_unit_price", "6000");
 
         // when & then
-        ResultActions result = this.mockMvc.perform(post("/order/request")
+        ResultActions result = this.mockMvc.perform(post("/orders")
                         .headers(headers)
                         .content(objectMapper.writeValueAsString(orderRequestData)))
                 .andExpect(status().isOk())
@@ -60,6 +61,7 @@ class OrderControllerTest {
     @Test
     @DisplayName("주문 요청이 실패한다.")
     @WithMockUser
+    @Order(2)
     public void failOfOrderRequest() throws Exception {
         // given
         HttpHeaders headers = new HttpHeaders();
@@ -73,7 +75,7 @@ class OrderControllerTest {
         orderRequestData.put("productUnitPrice", "6000");
 
         // when & then
-        ResultActions result = this.mockMvc.perform(post("/order/request")
+        ResultActions result = this.mockMvc.perform(post("/orders")
                         .headers(headers)
                         .content(objectMapper.writeValueAsString(orderRequestData)))
                 .andExpect(status().is4xxClientError())
@@ -81,5 +83,107 @@ class OrderControllerTest {
                 .andDo(print());
 
     }
+
+    @Test
+    @DisplayName("주문 주소 변경이 성공한다.")
+    @WithMockUser
+    @Order(3)
+    void successUpdateOrderAddress() throws Exception {
+
+        // given
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+        headers.set("Accept", "application/json");
+
+        Map<String, String> orderRequestData = new HashMap<>();
+        orderRequestData.put("order_id", "1");
+        orderRequestData.put("address", "인천 동구");
+
+        // when & then
+        ResultActions result = this.mockMvc.perform(post("/order/address")
+                        .headers(headers)
+                        .content(objectMapper.writeValueAsString(orderRequestData)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$..original_address").value("인천 서구"))
+                .andExpect(jsonPath("$..target_address").value("인천 동구"))
+                .andDo(print());
+
+    }
+
+    @Test
+    @DisplayName("주문접수 상태 변경이 성공한다.")
+    @WithMockUser
+    @Order(4)
+    void successUpdateOrderStatus() throws Exception {
+
+        // given
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+        headers.set("Accept", "application/json");
+
+        Map<String, String> orderRequestData = new HashMap<>();
+        orderRequestData.put("order_id", "1");
+
+        // when & then
+        ResultActions result = this.mockMvc.perform(post("/order/receipt")
+                        .headers(headers)
+                        .content(objectMapper.writeValueAsString(orderRequestData)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$..order_status").value("ORDER_ACCEPT"))
+                .andExpect(jsonPath("$..delivery_status").value("BEFORE_DELIVERY"))
+                .andDo(print());
+
+    }
+
+    @Test
+    @DisplayName("주문접수 상태 변경이 실패한다.")
+    @WithMockUser
+    @Order(5)
+    void failUpdateOrderStatus() throws Exception {
+
+        // given
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+        headers.set("Accept", "application/json");
+
+        Map<String, String> orderRequestData = new HashMap<>();
+        orderRequestData.put("order_id", "5");
+
+        // when & then
+        ResultActions result = this.mockMvc.perform(post("/order/receipt")
+                        .headers(headers)
+                        .content(objectMapper.writeValueAsString(orderRequestData)))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$..code").value("존재하지 않는 주문 정보"))
+                .andDo(print());
+
+    }
+
+    @Test
+    @DisplayName("주문 주소 변경이 실패한다.")
+    @WithMockUser
+    @Order(6)
+    void failUpdateOrderAddress() throws Exception {
+
+        // given
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+        headers.set("Accept", "application/json");
+
+        Map<String, String> orderRequestData = new HashMap<>();
+        orderRequestData.put("order_id", "1");
+        orderRequestData.put("address", "인천 동구");
+
+        // when & then
+        ResultActions result = this.mockMvc.perform(post("/order/address")
+                        .headers(headers)
+                        .content(objectMapper.writeValueAsString(orderRequestData)))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$..code").value("주소 변경 실패"))
+                .andDo(print());
+
+    }
+
+
 
 }

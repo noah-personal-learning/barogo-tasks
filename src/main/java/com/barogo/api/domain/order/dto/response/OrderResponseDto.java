@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class OrderResponseDto {
 
     @JsonProperty("order_id")
-    private Long id;
+    private Long orderId;
     @JsonProperty("order_date")
     private LocalDateTime orderDate;
     @JsonProperty("address")
@@ -32,9 +32,10 @@ public class OrderResponseDto {
     private BigDecimal productUnitPrice;
 
     @Builder
-    public OrderResponseDto(LocalDateTime orderDate, String address, OrderStatus status,
+    public OrderResponseDto(Long orderId, LocalDateTime orderDate, String address, OrderStatus status,
                             BigDecimal amount, BigDecimal fee,
                             String productName, Integer productCount, BigDecimal productUnitPrice) {
+        this.orderId = orderId;
         this.orderDate = orderDate;
         this.address = address;
         this.status = status;

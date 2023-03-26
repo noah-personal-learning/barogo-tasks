@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Entity(name = "orders")
 public class Order extends DateEntity {
 
+    /// Fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
@@ -48,6 +49,7 @@ public class Order extends DateEntity {
     @Column(name = "product_unit_price")
     private BigDecimal productUnitPrice;
 
+    /// Constructor
     @Builder
     public Order(LocalDateTime orderDate, String address, OrderStatus status,
                  LocalDateTime completeDate, BigDecimal amount, BigDecimal fee,
@@ -62,4 +64,10 @@ public class Order extends DateEntity {
         this.productCount = productCount;
         this.productUnitPrice = productUnitPrice;
     }
+
+    /// Method
+    public void updateStatus(OrderStatus orderStatus) {
+        this.status = orderStatus;
+    }
+    public void updateAddress(String address) { this.address = address; }
 }
