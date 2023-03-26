@@ -109,4 +109,27 @@ public class DeliveryControllerTest {
                 .andDo(print());
     }
 
+    @Test
+    @DisplayName("베송지 주소 업데이트 성공한다.")
+    @WithMockUser
+    void successUpdateAddress() throws Exception {
+        // given
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+        headers.set("Accept", "application/json");
+
+        Map<String,String> requestData = new HashMap<>();
+        requestData.put("delivery_id", "1");
+        requestData.put("address", "인천 남구");
+
+        // when & then00
+        ResultActions result = this.mockMvc.perform(post("/delivery/address")
+                        .headers(headers)
+                        .content(objectMapper.writeValueAsString(requestData)))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+
+
 }

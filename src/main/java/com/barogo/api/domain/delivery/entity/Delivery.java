@@ -36,4 +36,6 @@ public class Delivery extends DateEntity {
         this.address = address;
         this.status = status;
     }
+
+    public void updateAddress(String address) {this.address = address;}
 }
