@@ -1,6 +1,9 @@
 package com.barogo.api.global.error;
 
 import com.barogo.api.domain.delivery.exception.MaxBeforeDayException;
+import com.barogo.api.domain.delivery.exception.NotFoundDeliveryException;
+import com.barogo.api.domain.order.exception.NotFoundOrderException;
+import com.barogo.api.domain.order.exception.NotUpdateAddressException;
 import com.barogo.api.domain.user.exception.AlreadyUserIdException;
 import com.barogo.api.domain.user.exception.InvalidPasswordException;
 import com.barogo.api.domain.user.exception.NotFoundUserException;
@@ -82,5 +85,42 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler({NotFoundOrderException.class})
+    public ResponseEntity<Object> handleNotFoundOrder(final NotFoundOrderException ex, final HttpServletRequest request) {
+        logger.info(ex.getClass().getName());
+
+        Response response = Response.exceptionResponse()
+                .code(Errors.NOT_FOUND_ORDER.getCode())
+                .message(Errors.NOT_FOUND_ORDER.getDescription()).build();
+
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({NotUpdateAddressException.class})
+    public ResponseEntity<Object> handleNotFoundOrder(final NotUpdateAddressException ex, final HttpServletRequest request) {
+        logger.info(ex.getClass().getName());
+
+        Response response = Response.exceptionResponse()
+                .code(Errors.NOT_UPDATE_ADDRESS.getCode())
+                .message(Errors.NOT_UPDATE_ADDRESS.getDescription()).build();
+
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({NotFoundDeliveryException.class})
+    public ResponseEntity<Object> handleNotFoundOrder(final NotFoundDeliveryException ex, final HttpServletRequest request) {
+        logger.info(ex.getClass().getName());
+
+        Response response = Response.exceptionResponse()
+                .code(Errors.NOT_UPDATE_ADDRESS.getCode())
+                .message(Errors.NOT_UPDATE_ADDRESS.getDescription()).build();
+
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+
+
+
 
 }

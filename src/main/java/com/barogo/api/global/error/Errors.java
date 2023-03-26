@@ -6,6 +6,8 @@ public enum Errors {
 
     NOT_FOUND_USER("존재하지 않는 사용자 정보", "다른 아이디와 비밀번호로 다시 시도해주세요."),
     NOT_FOUND_ORDER("존재하지 않는 주문 정보", "다른 주문 정보로 다시 시도해주세요."),
+    NOT_FOUND_DELIVERY("존재하지 않는 배송 정보", "다른 배송 정보로 다시 시도해주세요."),
+    NOT_UPDATE_ADDRESS("주소 변경 실패", "주문 배송이 시작되어 변경이 불가합니다."),
 
     ALREADY_USER("이미 가입되어 있는 아이디", "다른 아이디로 다시 시도해주세요."),
 
@@ -18,7 +20,7 @@ public enum Errors {
     private final String code;
     private final String description;
 
-    private Errors(String code, String description) {
+    Errors(String code, String description) {
         this.code = code;
         this.description = description;
     }
